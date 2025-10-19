@@ -1,0 +1,57 @@
+form {
+  margin: 0 auto;
+  width: min(600px, 85vw);
+  padding: 1rem;
+  border-radius: 0.2rem;
+  background-color: rgba(65, 167, 133, 0.7);
+}
+
+form li + li {
+  margin-top: 0.5rem;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #000;
+}
+
+button {
+  margin-left: 0.5em;
+}
+
+form .button {
+  display: flex;
+  justify-content: center;
+}
+
+form button {
+  margin-top: 1rem;
+}
+
+form li {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  display: inline-block;
+  text-align: left;
+  width: 100%;
+}
+
+/*
+COMPORTEMENT SUR ECRAN > 600 px
+*/
+@media (min-width: 600px) {
+  form {
+    padding: 2rem;
+  }
+
+  form .button {
+    justify-content: flex-end;
+  }
+}
+
+
+
+
