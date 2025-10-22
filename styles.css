@@ -3,7 +3,12 @@
 
 /* Application du nouveau style sur tout le site */
 body, input, button, textarea, h1, h2, h3, h4, p, a {
-  font-family: 'Orbitron', sans-serif !important;
+  font-family: 'Orbitron', sans-serif ;
+}
+
+
+html main * {
+  font-family:  sans-serif ;
 }
 
 
@@ -17,13 +22,6 @@ body, input, button, textarea, h1, h2, h3, h4, p, a {
   --color-red: #FF0000;
   --color-blue: #41A785;
   
-}
-
-/* Importation de plusieurs polices */
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;600;700&family=Poppins:wght@400;500&display=swap');
-
-/* {
-  font-family: 'Audiowide', cursive !important;
 }
 
 
@@ -40,12 +38,6 @@ button {
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   color: #222;
-}
-
-/* --- Style du logo / titre principal du site --- */
-header h1 {
-  font-family: 'Audiowide', cursive;
-  letter-spacing: 1px;
 }
 
 
@@ -106,6 +98,7 @@ header {
   background-color: var(--color-vert);
 }
 
+
 /** Logo */
 header img,
 footer img {
@@ -129,6 +122,12 @@ header div p {
 
 /** Header sur Desktop **/
 @media (min-width: 601px) {
+  header nav > div >div:nth-child(2) a span{
+    display: flex;
+    width: 100%;
+    justify-content:flex-end;
+  }
+
   header a {
     display: flex;
     align-items: center;
@@ -156,7 +155,7 @@ header div p {
   header .inscription {
     font-size: 0.9rem;
     color: var(--color-red);
-    margin-top: 1rem;
+    margin-top: 10rem;
   }
 }
 
@@ -177,9 +176,6 @@ section div img {
 section div .petit-logo {
   width: 9rem;
 }
-
-
-
 
 
 /* ✅ Rendre les logos dans un carré à effet verre (glass) */
@@ -278,7 +274,7 @@ button:hover {
   font-family: 'Tahoma', sans-serif;
    font-size: 1em;
   margin-top: 25px;
-  color: #140101;
+  color: #fff;
 }
 
 }
@@ -321,3 +317,96 @@ footer .footer-wrapper p a {
   color: inherit;
 }
 
+
+
+/* ===== FORM STYLE INSIDE MOBILE PAGE ===== */
+
+form {
+  width: 90%;
+  max-width: 340px;
+  margin: 20px auto;
+  padding: 18px;
+  border-radius: 10px;
+  background-color: rgba(65, 167, 133, 0.85);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+ 
+}
+
+/* Titre du formulaire */
+
+form h2 {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* Boîtes d’entrée */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+/* Lors de la mise au point */
+form input:focus {
+  border-color: #f5f570;
+  background-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 6px rgba(245, 245, 112, 0.7);
+}
+
+/* Texte interne */
+form input::placeholder {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Bouton d’inscription */
+form button,
+form input[type="submit"] {
+  width: 100%;
+  background-color: #f5f570;
+  color: #222;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 0;
+    font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+form button:hover,
+form input[type="submit"]:hover {
+  background-color: #41a785;
+  color: white;
+}
+
+/* Texte du bas */
+form p {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #fff;
+  text-align: center;
+}
+
+
+@media (max-width: 480px) {
+  form {
+    padding: 14px;
+    font-size: 13px;
+  }
+}
+
+
+/********** Page de Ligues **********/
+#pages-ligue {
+  
+}

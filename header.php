@@ -29,7 +29,7 @@
     </div>
 
     <div class="desktop-display-none">
-      <a href="menus.php" title="Accéder à la page menu">
+      <a href="menusT.php" title="Accéder à la page menu">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="gold">
           <g stroke="#F5F570" stroke-width="2.5" stroke-linecap="round">
             <path d="M20 7H4M20 12H4M20 17H4" />
@@ -39,19 +39,29 @@
     </div>
 
     <nav>
-    <div>
-      <div>
-        <a class="mobile-display-none" href="Connexion.php">
-          <img src="./Logos/Logos_Mix/connexion.png" width="50" alt="Connexion" />
-          <span>Connexion</span>
-        </a>
-      </div>
-    
-      <div>
-        <a class="mobile-display-none" href="Inscription.php">
-          <span>Inscription</span>
-        </a>
-      </div>
-    </div>
+      <?php if (!isset($_SESSION['user_name'])) { ?>
+        <div>
+          <div>
+            <a class="mobile-display-none" href="Connexion.php">
+              <img src="./Logos/Logos_Mix/connexion.png" width="50" alt="Connexion" />
+              <span>Connexion</span>
+            </a>
+          </div>
+        
+          <div>
+            <a class="mobile-display-none" href="Inscription.php">
+              <span id="inscription-id" class="inscription-class">Inscription</span>
+            </a>
+          </div>
+        </div>
+      <?php } else { ?>
+        <div>
+          <span>Bienvenue, <?php echo htmlspecialchars($_SESSION['user_name']); ?> !</span>
+          <a href="deconnexion.php">
+            <span>Déconnexion</span>
+          </a>
+        </div>
+      <?php } ?>
+
     </nav>
   </header>

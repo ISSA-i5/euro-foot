@@ -1,12 +1,13 @@
 <?php
 $pageName = "inscription";
+require_once 'bdd.php';
 require_once 'header.php';
-require_once 'config.php'; // paramètres de connexion à la base de données
 ?>
 
 <?php
 // Fonction d'affichage des messages
-function show_message($text, $type = 'error') {
+function show_message($text, $type = 'error')
+{
     $class = ($type === 'success') ? 'message success' : 'message error';
     echo "<div class=\"$class\">$text</div>";
 }
@@ -33,13 +34,8 @@ if (isset($_POST['submit'])) {
     // Vérification de la confirmation
     elseif ($password !== $confirm_password) {
         show_message("Les mots de passe ne correspondent pas.");
-    }
-    else {
+    } else {
         try {
-            // Connexion à la base
-            $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
             // Vérifier si l'email existe déjà
             $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
             $stmt->execute(['email' => $email]);
@@ -71,48 +67,67 @@ if (isset($_POST['submit'])) {
 ?>
 
 <style>
-.message {
-  max-width: 600px;
-  margin: 12px auto;
-  padding: 12px;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: 600;
-  line-height: 1.4em;
-}
-.message.error { background: #ffecec; color: #c00; border: 1px solid #f5c2c2; }
-.message.success { background: #e8ffea; color: #0a6b20; border: 1px solid #bde7c2; }
+    .message {
+
+        max-width: 600px;
+        margin: 12px auto;
+        padding: 12px;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.4em;
+    }
+
+
+    .message.error {
+        background: #ffecec;
+        color: #c00;
+        border: 1px solid #f5c2c2;
+    }
+
+    .message.success {
+        background: #e8ffea;
+        color: #0a6b20;
+        border: 1px solid #bde7c2;
+    }
 </style>
 
 <main>
-  <section class="form-container">
-    <form action="inscription.php" method="POST" novalidate>
-      <h2>Créer un compte</h2>
+    <section class="form-container">
+        <form action="inscription.php" method="POST" novalidate>
+            <h2>Créer un compte</h2>
 
-      <input type="text" name="username"
-             placeholder="Nom complet"
-             required pattern="[\p{L} ]+"
-             title="Nom uniquement (lettres seulement)" />
+            <input type="text" name="username"
+                placeholder="Nom complet"
+                required pattern="[\p{L} ]+"
+                title="Nom uniquement (lettres seulement)" 
+                value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>"
+            />
 
-      <input type="email" name="email" placeholder="Email" required />
+            <input type="email" name="email" placeholder="Email" required  value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"/>
 
-      <input type="password" name="password"
-             placeholder="Mot de passe"
-             required pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}"
-             title="8 caractères minimum avec lettres et chiffres" />
+            <input type="password" name="password"
+                placeholder="Mot de passe"
+                required 
+                pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}"
+                title="8 caractères minimum avec lettres et chiffres"
+                value="<?php echo isset($password) ? htmlspecialchars($password) : ''; ?>"
+                />
 
-      <input type="password" name="confirm_password"
-             placeholder="Confirmer le mot de passe"
-             required pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}"
-             title="Même règle que le mot de passe" />
+            <input type="password" name="confirm_password"
+                placeholder="Confirmer le mot de passe"
+                required pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}"
+                title="Même règle que le mot de passe" 
+                value="<?php echo isset($confirm_password) ? htmlspecialchars($confirm_password) : ''; ?>"
+                />
 
-      <button type="submit" name="submit">S'inscrire</button>
+            <button type="submit" name="submit">S'inscrire</button>
 
-      <p class="info-text">
-        En créant un compte, vous acceptez nos conditions d'utilisation.
-      </p>
-    </form>
-  </section>
+            <p class="info-text">
+                En créant un compte, vous acceptez nos conditions d'utilisation.
+            </p>
+        </form>
+    </section>
 </main>
 
 <?php require_once 'footer.php'; ?>

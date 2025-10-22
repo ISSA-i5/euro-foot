@@ -7,25 +7,25 @@
   // echo '<pre>';
   // print_r($_SESSION);
   // echo '</pre>';
-  if (isset($_SESSION['user_name'])) {
-    echo "<p class='success' style='text-align: center;'>Bienvenue " . htmlspecialchars($_SESSION['user_name']) . " ! Vous êtes connecté.</p>";
-  }
+  // if (isset($_SESSION['user_name'])) {
+  //   echo "<p class='success' style='text-align: center;'>Bienvenue " . htmlspecialchars($_SESSION['user_name']) . " ! Vous êtes connecté.</p>";
+  // }
 
 ?>
 
 <main>
   <section>
     <div>
-      <a href="Ligue_1.php">
+      <a href="ligue.php?id=1">
         <img src="./Logos/league/Ligue1 F.png" width="50" alt="Ligue 1" />
       </a>
-      <a href="PSG.php">
+      <a href="/clubs/Psg.php">
         <img class="petit-logo" src="./Logos/Logo E/psg.webp" width="50" alt="PSG" />
       </a>
     </div>
 
     <div>
-      <a href="Laliga.php">
+      <a href="ligue.php?id=2">
         <img src="./Logos/league/Laliga.webp" width="50" alt="Laliga" />
       </a>
       <a href="Real_Madrid.php">
@@ -34,7 +34,7 @@
     </div>
 
     <div>
-      <a href="Serie_A.php">
+      <a href="ligue.php?id=3">
         <img src="./Logos/league/Serie A.png" width="50" alt="Serie A" />
       </a>
       <a href="Juventus.php">
@@ -43,7 +43,7 @@
     </div>
 
     <div>
-      <a href="Premier_League.php">
+      <a href="ligue.php?id=4">
         <img src="./Logos/league/P League E.png" width="50" alt="Premier League" />
       </a>
       <a href="Liverpool.php">
@@ -52,5 +52,6 @@
     </div>
   </section>
 </main>
+
 
 <?php require_once 'footer.php'; ?>

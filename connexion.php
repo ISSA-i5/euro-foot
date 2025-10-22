@@ -1,5 +1,6 @@
 <?php
 $pageName = "connexion";
+require_once 'bdd.php'; // $pdo
 require_once 'header.php';
 
 ?>
@@ -41,12 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       elseif (strlen($password) < 5) echo "<p class='error'>Le mot de passe doit contenir au moins 5 caractères.</p>";
 
       else {
-            // Connexion à la base de données
-            require_once 'config.php';
             try {
-                  $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_password);
-                  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                   // Préparation et exécution de la requête
                   $stmt = $pdo->prepare("SELECT id, password, name FROM users WHERE email = :email");
                   $stmt->bindParam(':email', $email);
@@ -62,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       $_SESSION['user_email'] = $email;
                       $_SESSION['user_name'] = $user['name']; // Utiliser la partie avant '@' comme nom d'utilisateur
                       echo "<p class='success'>Connexion réussie. Bienvenue !</p>";
-                      echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 2000);</script>";
+                      echo "<script>setTimeout(function(){ window.location.href = 'index.php'; }, 0);</script>";
                   } else {
                       // Échec de l'authentification
                       echo "<p class='error'>E-mail ou mot de passe incorrect.</p>";
@@ -80,11 +76,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <ul>
                   <li>
                         <label for="mail">E-mail&nbsp;:</label>
-                        <input type="email" id="mail" name="user_mail" />
+                        <input type="email" id="mail" name="user_mail" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" />
                   </li>
                   <li>
                         <label for="msg">Mot de passe&nbsp;:</label>
-                        <input type="password" id="msg" name="user_password" />
+                        <input type="password" id="msg" name="user_password" value="<?php echo isset($password) ? htmlspecialchars($password) : ''; ?>" />
                   </li>
                   <div class="button">
                         <button type="submit">Se connecter</button>
