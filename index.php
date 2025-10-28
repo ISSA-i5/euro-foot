@@ -1,57 +1,52 @@
-<?php require_once 'header.php'; ?>
+<?php
+require_once 'header.php';
+require_once 'bdd.php';
+?>
 
 <?php
-  // Si existe variable sessin email alors on affiche un message de bienvenue
+// Message de bienvenue si utilisateur connecté
+if (isset($_SESSION['user_name'])) {
+  echo "<p class='success' style='text-align: center;'>Bienvenue " . htmlspecialchars($_SESSION['user_name']) . " ! Vous êtes connecté.</p>";
+}
 
-  // Afficher les variables de session pour le débogage
-  // echo '<pre>';
-  // print_r($_SESSION);
-  // echo '</pre>';
-  // if (isset($_SESSION['user_name'])) {
-  //   echo "<p class='success' style='text-align: center;'>Bienvenue " . htmlspecialchars($_SESSION['user_name']) . " ! Vous êtes connecté.</p>";
-  // }
-
+// 🔹 Récupérer toutes les ligues et leur club le plus titré
+$stmt = $pdo->query("
+  SELECT 
+    l.id_ligue, l.nom_ligue, l.logo AS logo_ligue,
+    c.id_club, c.name AS club_name, c.logo AS club_logo
+  FROM ligues l
+  LEFT JOIN clubs c ON c.id_ligue = l.id_ligue
+  AND c.vedette = 1
+  ORDER BY l.id_ligue ASC
+");
+$ligues = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <main>
   <section>
-    <div>
-      <a href="ligue.php?id=1">
-        <img src="./Logos/league/Ligue1 F.png" width="50" alt="Ligue 1" />
-      </a>
-      <a href="/clubs/Psg.php">
-        <img class="petit-logo" src="./Logos/Logo E/psg.webp" width="50" alt="PSG" />
-      </a>
-    </div>
+    <?php foreach ($ligues as $ligue): ?>
+      <div>
+        <!-- Logo de la ligue -->
+        <a href="ligue.php?id_ligue=<?= $ligue['id_ligue']; ?>">
+          <img src="<?= htmlspecialchars($ligue['logo_ligue']); ?>" width="50" alt="<?= htmlspecialchars($ligue['nom_ligue']); ?>" />
+        </a>
 
-    <div>
-      <a href="ligue.php?id=2">
-        <img src="./Logos/league/Laliga.webp" width="50" alt="Laliga" />
-      </a>
-      <a href="Real_Madrid.php">
-        <img class="petit-logo" src="./Logos/Logo E/RM 2.png" width="50" alt="Real Madrid" />
-      </a>
-    </div>
-
-    <div>
-      <a href="ligue.php?id=3">
-        <img src="./Logos/league/Serie A.png" width="50" alt="Serie A" />
-      </a>
-      <a href="Juventus.php">
-        <img class="petit-logo" src="./Logos/Logo E/JV-3.png" width="50" alt="Juventus" />
-      </a>
-    </div>
-
-    <div>
-      <a href="ligue.php?id=4">
-        <img src="./Logos/league/P League E.png" width="50" alt="Premier League" />
-      </a>
-      <a href="Liverpool.php">
-        <img class="petit-logo" src="./Logos/Logo E/L.Pool.png" width="50" alt="Liverpool" />
-      </a>
-    </div>
+        <!-- Logo du club le plus populaire -->
+        <?php if (!empty($ligue['id_club'])): ?>
+          <a href="clubs/club.php?id=<?= $ligue['id_club']; ?>">
+            <img class="petit-logo"
+              src="<?= htmlspecialchars($ligue['club_logo']); ?>"
+              width="50"
+              alt="<?= htmlspecialchars($ligue['club_name']); ?>" />
+          </a>
+        <?php else: ?>
+          <a href="#">
+            <img class="petit-logo" src="Logos/Logo E/default.png" width="50" alt="Aucun club" />
+          </a>
+        <?php endif; ?>
+      </div>
+    <?php endforeach; ?>
   </section>
 </main>
-
 
 <?php require_once 'footer.php'; ?>

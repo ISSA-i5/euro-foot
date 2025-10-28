@@ -83,6 +83,7 @@ html#menus {
 }
 
 
+
 body {
   display: flex;
   flex-direction: column;
@@ -409,4 +410,101 @@ form p {
 /********** Page de Ligues **********/
 #pages-ligue {
   
+}
+
+/********** PAGE CLUB **********/
+.club-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 2rem;
+  color: var(--color-blanc);
+}
+
+.club-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem 3rem;
+  max-width: 750px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.club-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.club-logo {
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+}
+
+.club-title {
+  color: var(--color-jaune);
+  font-size: 2rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.club-description {
+  margin: 1rem 0 1.5rem 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--color-gris);
+}
+
+.club-details {
+  text-align: left;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.club-details p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.club-legends {
+  color: var(--color-jaune);
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.btn-site {
+  display: inline-block;
+  margin-top: 1.8rem;
+  padding: 12px 25px;
+  background-color: var(--color-vert);
+  color: var(--color-jaune);
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.btn-site:hover {
+  background-color: var(--color-jaune);
+  color: var(--color-noir);
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }

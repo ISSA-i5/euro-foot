@@ -70,9 +70,4 @@ require_once 'header.php';
 }
 </style>
 
-
-
-
-
-
 <?php require_once 'footer.php'; ?>
